@@ -1,0 +1,14 @@
+md2gdocs.py
+  h_33bffbb19945dc 454-457,459-476,479-481,677-679,681,683
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "441c0b44c632d26f705637c69330861d1c645236",
+  "prompts": {},
+  "humans": {
+    "h_33bffbb19945dc": {
+      "author": "DarioGdR <dario.garcia@pedidosya.com>"
+    }
+  }
+}
