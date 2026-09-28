@@ -451,34 +451,34 @@ def convert_markdown_source(content, doc_dir, output_file, max_img_width=600, do
 
                 # Comprehensive Obsidian Callout Palette
                 callout_palette = {
-                    "note": ("#ddf4ff", "#0969da", "#0969da", "📝 Nota"),
-                    "seealso": ("#ddf4ff", "#0969da", "#0969da", "📝 Véase también"),
-                    "summary": ("#ddf4ff", "#0969da", "#0969da", "📌 Resumen"),
-                    "abstract": ("#ddf4ff", "#0969da", "#0969da", "📌 Resumen"),
+                    "note": ("#ddf4ff", "#0969da", "#0969da", "📝 Note"),
+                    "seealso": ("#ddf4ff", "#0969da", "#0969da", "📝 See also"),
+                    "summary": ("#ddf4ff", "#0969da", "#0969da", "📌 Summary"),
+                    "abstract": ("#ddf4ff", "#0969da", "#0969da", "📌 Abstract"),
                     "tldr": ("#ddf4ff", "#0969da", "#0969da", "📌 TL;DR"),
-                    "info": ("#ddf4ff", "#0969da", "#0969da", "ℹ️ Información"),
-                    "todo": ("#ddf4ff", "#0969da", "#0969da", "☑️ Por Hacer"),
-                    "tip": ("#dafbe1", "#1a7f37", "#1a7f37", "💡 Sugerencia"),
-                    "hint": ("#dafbe1", "#1a7f37", "#1a7f37", "💡 Pista"),
-                    "important": ("#fbefff", "#8250df", "#8250df", "⚡ Importante"),
-                    "success": ("#dafbe1", "#1a7f37", "#1a7f37", "✅ Éxito"),
-                    "check": ("#dafbe1", "#1a7f37", "#1a7f37", "✅ Verificado"),
-                    "done": ("#dafbe1", "#1a7f37", "#1a7f37", "✅ Listo"),
-                    "question": ("#fbefff", "#8250df", "#8250df", "❓ Pregunta"),
-                    "help": ("#fbefff", "#8250df", "#8250df", "❓ Ayuda"),
-                    "faq": ("#fbefff", "#8250df", "#8250df", "❓ Preguntas Frecuentes"),
-                    "warning": ("#fff8c5", "#9a6700", "#9a6700", "⚠️ Advertencia"),
-                    "caution": ("#fff8c5", "#9a6700", "#9a6700", "⚠️ Precaución"),
-                    "attention": ("#fff8c5", "#9a6700", "#9a6700", "⚠️ Atención"),
-                    "failure": ("#ffebe9", "#cf222e", "#cf222e", "❌ Fallo"),
-                    "fail": ("#ffebe9", "#cf222e", "#cf222e", "❌ Fallo"),
-                    "missing": ("#ffebe9", "#cf222e", "#cf222e", "❌ Faltante"),
-                    "danger": ("#ffebe9", "#cf222e", "#cf222e", "🛑 Peligro"),
+                    "info": ("#ddf4ff", "#0969da", "#0969da", "ℹ️ Info"),
+                    "todo": ("#ddf4ff", "#0969da", "#0969da", "☑️ Todo"),
+                    "tip": ("#dafbe1", "#1a7f37", "#1a7f37", "💡 Tip"),
+                    "hint": ("#dafbe1", "#1a7f37", "#1a7f37", "💡 Hint"),
+                    "important": ("#fbefff", "#8250df", "#8250df", "⚡ Important"),
+                    "success": ("#dafbe1", "#1a7f37", "#1a7f37", "✅ Success"),
+                    "check": ("#dafbe1", "#1a7f37", "#1a7f37", "✅ Checked"),
+                    "done": ("#dafbe1", "#1a7f37", "#1a7f37", "✅ Done"),
+                    "question": ("#fbefff", "#8250df", "#8250df", "❓ Question"),
+                    "help": ("#fbefff", "#8250df", "#8250df", "❓ Help"),
+                    "faq": ("#fbefff", "#8250df", "#8250df", "❓ FAQ"),
+                    "warning": ("#fff8c5", "#9a6700", "#9a6700", "⚠️ Warning"),
+                    "caution": ("#fff8c5", "#9a6700", "#9a6700", "⚠️ Caution"),
+                    "attention": ("#fff8c5", "#9a6700", "#9a6700", "⚠️ Attention"),
+                    "failure": ("#ffebe9", "#cf222e", "#cf222e", "❌ Failure"),
+                    "fail": ("#ffebe9", "#cf222e", "#cf222e", "❌ Fail"),
+                    "missing": ("#ffebe9", "#cf222e", "#cf222e", "❌ Missing"),
+                    "danger": ("#ffebe9", "#cf222e", "#cf222e", "🛑 Danger"),
                     "error": ("#ffebe9", "#cf222e", "#cf222e", "🛑 Error"),
                     "bug": ("#ffebe9", "#cf222e", "#cf222e", "🐛 Bug"),
-                    "example": ("#f6f8fa", "#8250df", "#8250df", "🧪 Ejemplo"),
-                    "quote": ("#f6f8fa", "#57606a", "#57606a", "💬 Cita"),
-                    "cite": ("#f6f8fa", "#57606a", "#57606a", "💬 Cita"),
+                    "example": ("#f6f8fa", "#8250df", "#8250df", "🧪 Example"),
+                    "quote": ("#f6f8fa", "#57606a", "#57606a", "💬 Quote"),
+                    "cite": ("#f6f8fa", "#57606a", "#57606a", "💬 Cite"),
                 }
                 bg, border, title_col, def_title = callout_palette.get(
                     c_type, ("#f6f8fa", "#57606a", "#24292f", c_type.capitalize())
@@ -674,10 +674,13 @@ def convert_markdown(input_path_or_paths, output_path=None, max_img_width=600, d
     if output_path:
         out_file = Path(output_path).resolve()
     else:
+        import tempfile
+        tmp_dir = Path(tempfile.gettempdir()) / "obsidian2gdocs"
+        tmp_dir.mkdir(parents=True, exist_ok=True)
         if len(target_files) > 1:
-            out_file = doc_dir / f"{doc_dir.name}_compilado.html"
+            out_file = tmp_dir / f"{doc_dir.name}_compiled.html"
         else:
-            out_file = doc_dir / f"{target_files[0].stem}.html"
+            out_file = tmp_dir / f"{target_files[0].stem}.html"
 
     # Merge content
     merged_sections = []
