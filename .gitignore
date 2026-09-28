@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.bak
+.DS_Store
+.diagrams_cache/
+diagrams/
+*.html
