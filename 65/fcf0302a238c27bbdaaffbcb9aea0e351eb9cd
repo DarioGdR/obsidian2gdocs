@@ -1,0 +1,22 @@
+.gitignore
+  h_33bffbb19945dc 1-7
+README.md
+  h_33bffbb19945dc 1-84
+SKILL.md
+  h_33bffbb19945dc 1-92
+md2gdocs.py
+  h_33bffbb19945dc 1-783
+skills/obsidian-to-gdocs/SKILL.md
+  h_33bffbb19945dc 1-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "65fcf0302a238c27bbdaaffbcb9aea0e351eb9cd",
+  "prompts": {},
+  "humans": {
+    "h_33bffbb19945dc": {
+      "author": "DarioGdR <dario.garcia@pedidosya.com>"
+    }
+  }
+}
