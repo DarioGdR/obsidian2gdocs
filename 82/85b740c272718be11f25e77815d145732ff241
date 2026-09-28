@@ -1,0 +1,14 @@
+README.md
+  h_33bffbb19945dc 3,7,9,11-15,17,21-67,71,73-97,101,103,105-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8285b740c272718be11f25e77815d145732ff241",
+  "prompts": {},
+  "humans": {
+    "h_33bffbb19945dc": {
+      "author": "DarioGdR <dario.garcia@pedidosya.com>"
+    }
+  }
+}
