@@ -1,106 +1,101 @@
-# obsidian2gdocs (md2gdocs) — Obsidian & Markdown to Google Docs Exporter
+# obsidian2gdocs — Obsidian & Markdown to Google Docs Exporter
 
-Centralized CLI tool to convert Obsidian notes and complex Markdown documents (with Mermaid diagrams, highlighted code blocks, callouts, tables, local images, and links) into a self-contained HTML document optimized for direct pasting into Google Docs with full visual fidelity and free image resizing.
-
----
-
-## Quickstart
-
-From any terminal on macOS:
-
-1. Compile and automatically COPY the formatted document to the macOS clipboard:
-   ```bash
-   obsidian2gdocs my-note.md
-   # (or using the alias "md2gdocs")
-   ```
-
-2. Switch to Google Docs and press **Cmd + V**. Done!
+Herramienta CLI centralizada para convertir notas de Obsidian y documentos Markdown complejos (con diagramas Mermaid, callouts, tablas, imágenes locales y enlaces) en un documento HTML autocontenido optimizado para pegarse directamente en Google Docs con fidelidad visual completa y redimensionamiento libre.
 
 ---
 
-## Supported Features
+## 🚀 Inicio Rápido
 
-### 1. Mermaid Diagrams & Workflows
-Supports any mermaid code block:
-* Flowcharts (`flowchart TD`, `flowchart LR`, `graph TD`)
-* Sequence diagrams (`sequenceDiagram`)
-* Entity-Relationship, Class, and State diagrams (`erDiagram`, `classDiagram`, `stateDiagram`)
-* Timelines (`timeline`), Git graphs (`gitGraph`), Pie charts (`pie`), Gantt (`gantt`)
-* **Smart MD5 Caching:** Each diagram is rendered to a high-resolution PNG and stored in local cache (`diagrams/` or `.diagrams_cache/`). Re-rendering only occurs if diagram code changes, enabling builds in **0.1 seconds**.
-
-### 2. Professional Code Blocks (Pygments Syntax Highlighting)
-* Encapsulated in single-cell HTML tables with a continuous `#f6f8fa` background and `#d0d7de` border.
-* **Eliminates the Google Docs `<pre>` bug:** No white horizontal gaps between lines and no fragmented black boxes.
-* **Real Syntax Highlighting:** Powered by Pygments with support for Go, Kotlin, SQL, Python, JSON, Bash, YAML, TypeScript, and more.
-* Clean uppercase header indicating the language (e.g. `GO`, `SQL`, `KOTLIN`).
-
-### 3. Multi-File & Folder Merging
-* If pointing to a folder (`obsidian2gdocs my-folder/`), naturally sorts all `.md` files in numerical order (`00`, `01`, ..., `10`, etc.) and merges them into a single continuous document.
-* Automatically inserts native page breaks (`page-break-before: always`) between chapters so each file begins on a clean page in Google Docs and populates the native Document Outline / Sidebar.
-* Supports passing multiple files in any custom order: `obsidian2gdocs 01.md 02.md 03.md`.
-
-### 4. Full Obsidian Callout Palette
-Converts standard Obsidian callout syntax (`> [!type] Title`) into beautifully styled visual cards with English defaults:
-* `[!important]` ⚡ Important (Vibrant purple)
-* `[!tip]` / `[!hint]` 💡 Tip / Hint (Green)
-* `[!note]` / `[!seealso]` 📝 Note / See also (Blue)
-* `[!info]` / `[!todo]` ℹ️ Info / Todo (Blue)
-* `[!summary]` / `[!abstract]` / `[!tldr]` 📌 Summary / Abstract / TL;DR (Blue)
-* `[!success]` / `[!check]` / `[!done]` ✅ Success / Checked / Done (Green)
-* `[!question]` / `[!help]` / `[!faq]` ❓ Question / Help / FAQ (Indigo)
-* `[!warning]` / `[!caution]` / `[!attention]` ⚠️ Warning / Caution / Attention (Amber)
-* `[!danger]` / `[!error]` / `[!bug]` 🛑 Danger / Error / Bug (Deep red)
-* `[!failure]` / `[!fail]` / `[!missing]` ❌ Failure (Red)
-* `[!example]` 🧪 Example (Violet)
-* `[!quote]` / `[!cite]` 💬 Quote (Grey)
-
-### 5. Images (Obsidian Wikilinks & Markdown)
-* **Wikilinks with custom width:** `![[image.png]]` or `![[image.png|450]]` (sets width to 450px).
-* **Standard Markdown images:** `![alt](path/to/image.png)`.
-* **Base64 Inlining:** All images and diagrams are inlined into the HTML; the resulting file is 100% self-contained and offline-ready.
-* **Free Resizing in Google Docs:** Images are inserted directly without table wrappers, allowing you to click any image in Google Docs and drag the corner handles to resize freely.
-
-### 6. Tables with Column Alignment
-Interprets Markdown column alignments (`:---`, `:---:`, `---:`) to generate clean HTML tables with `#d0d7de` borders and shaded header rows that Google Docs converts into native editable tables.
-
-### 7. Clean Temp Directory Output
-* By default, intermediate HTML files are written to the macOS temporary directory (`$TMPDIR/obsidian2gdocs/`), keeping your vault and workspace clean without cluttering folders with `.html` files.
-
----
-
-## CLI Options
+Desde cualquier carpeta o terminal de tu Mac:
 
 ```bash
-# Compile single document (generates HTML in temp and copies to clipboard)
-obsidian2gdocs my-note.md
+# 1. Compila y COPIA automáticamente el documento formateado al portapapeles de macOS:
+obsidian2gdocs mi-nota.md
 
-# Compile and merge all notes in a folder in natural numeric order
-obsidian2gdocs path/to/vault/
-
-# Compile and automatically trigger Cmd + V in the frontmost window
-obsidian2gdocs my-note.md -p
-
-# Live watch mode (recompiles and copies on every save)
-obsidian2gdocs my-note.md -w
-
-# Open generated HTML in default browser
-obsidian2gdocs my-note.md -b
-
-# Custom output file path
-obsidian2gdocs my-note.md -o output.html
-
-# Custom default image width in pixels (default: 600)
-obsidian2gdocs my-note.md --width 700
-
-# Do not copy to clipboard
-obsidian2gdocs my-note.md --no-copy
+# 2. Ve a Google Docs y presiona Cmd + V. ¡Listo!
 ```
 
 ---
 
-## Gemini CLI Integration
+## 🌟 Características Soportadas
 
-This repository includes a skill for Gemini CLI at `skills/obsidian-to-gdocs/SKILL.md`.
+### 1. Diagramas Mermaid & Flujos
+Soporta cualquier bloque ````mermaid ... ````:
+* Flowcharts (`flowchart TD`, `flowchart LR`, `graph TD`)
+* Diagramas de secuencia (`sequenceDiagram`)
+* Diagramas de clases, estados, entidad-relación (`erDiagram`, `classDiagram`, `stateDiagram`)
+* Líneas de tiempo (`timeline`), Git graphs (`gitGraph`), gráficos circulares (`pie`), Gantt (`gantt`)
+* **Caché Inteligente por MD5:** Cada diagrama se renderiza a PNG de alta resolución y se almacena en caché local (`diagrams/` o `.diagrams_cache/`). Solo se vuelve a renderizar si modificas el código del diagrama, permitiendo compilaciones en **0.1 segundos**.
 
-* **Skill Name:** `obsidian-to-gdocs`
-* **Security Policy:** `~/.gemini/policies/obsidian-to-gdocs.toml`
+### 2. Paleta Completa de Callouts de Obsidian
+Convierte sintaxis estándar de callouts `> [!tipo] Título` (incluyendo variantes plegables `+` y `-`) en tarjetas visuales estilizadas:
+* `[!important]` ⚡ Importante (Púrpura vibrante)
+* `[!tip]` / `[!hint]` 💡 Sugerencia / Pista (Verde)
+* `[!note]` / `[!seealso]` 📝 Nota (Azul)
+* `[!info]` / `[!todo]` ℹ️ Información / Por Hacer (Azul)
+* `[!summary]` / `[!abstract]` / `[!tldr]` 📌 Resumen Ejecutivo (Azul)
+* `[!success]` / `[!check]` / `[!done]` ✅ Éxito / Listo (Verde)
+* `[!question]` / `[!help]` / `[!faq]` ❓ Preguntas Frecuentes (Índigo)
+* `[!warning]` / `[!caution]` / `[!attention]` ⚠️ Advertencia / Precaución (Ámbar)
+* `[!danger]` / `[!error]` / `[!bug]` 🛑 Peligro / Error / Bug (Rojo profundo)
+* `[!failure]` / `[!fail]` / `[!missing]` ❌ Fallo (Rojo)
+* `[!example]` 🧪 Ejemplo (Violeta)
+* `[!quote]` / `[!cite]` 💬 Cita (Gris)
+
+### 3. Imágenes de Obsidian & Markdown
+* **Wikilinks con ancho personalizado:** `![[imagen.png]]` o `![[imagen.png|450]]` (fija el ancho a 450px).
+* **Imágenes estándar:** `![texto](ruta/a/imagen.png)`.
+* **Embebido en Base64:** Todas las imágenes y diagramas se convierten a cadenas inline en el HTML; el archivo resultante es 100% autocontenido y funciona sin conexión.
+* **Redimensionamiento libre en Google Docs:** Las imágenes se insertan como párrafos directos sin celdas de tabla invisibles. Al pegarlas en Google Docs, puedes hacer clic en cualquier imagen y arrastrar los 4 tiradores de las esquinas para estirarla o achicarla libremente.
+
+### 4. Tablas con Alineación de Columnas
+Interpreta las marcas de alineación de Markdown:
+* `:---` (Alineado a la izquierda)
+* `:---:` (Centrado)
+* `---:` (Alineado a la derecha)
+Genera tablas limpias con bordes `#d0d7de` y cabeceras sombreadas que Google Docs convierte en tablas editables nativas.
+
+### 5. Sintaxis Adicional de Obsidian & Markdown
+* **Resaltado:** `==texto resaltado==` $\to$ `<mark>` amarillo suave.
+* **Listas de tareas:** `- [ ] Pendiente` $\to$ `☐ Pendiente`, `- [x] Completada` $\to$ `☑ Completada`.
+* **Wikilinks internos:** `[[Mi Nota|Texto a mostrar]]` $\to$ `Texto a mostrar`.
+* **Tachado:** `~~texto tachado~~` $\to$ `<s>texto tachado</s>`.
+* **Hipervínculos:** `[texto](url)` $\to$ enlaces clickeables con subrayado azul.
+* **Bloques de código y código inline:** Fuentes monoespacio con fondo oscuro/claro estilizado.
+
+---
+
+## 🛠️ Comandos y Opciones de la CLI
+
+```bash
+# Compilar documento actual (genera mi-nota.html y lo copia al portapapeles)
+obsidian2gdocs mi-nota.md
+
+# Abrir el HTML en el navegador por defecto tras compilar
+obsidian2gdocs mi-nota.md --open    # o flag corto: -b
+
+# Modo observación en vivo (recompila y copia automáticamente cada vez que guardas en Obsidian)
+obsidian2gdocs mi-nota.md --watch   # o flag corto: -w
+
+# Especificar archivo de salida personalizado
+obsidian2gdocs mi-nota.md -o /ruta/personalizada/salida.html
+
+# Ajustar el ancho máximo por defecto de las imágenes (por defecto 600px)
+obsidian2gdocs mi-nota.md --width 700
+
+# No copiar al portapapeles
+obsidian2gdocs mi-nota.md --no-copy
+
+# Si ejecutas obsidian2gdocs en una carpeta sin argumentos, detecta automáticamente el .md principal
+cd /mi/carpeta/con/notas
+obsidian2gdocs
+```
+
+---
+
+## 📍 Ubicación en tu Sistema
+
+* **Script Python:** `~/dev/repos/dariogdr/obsidian2gdocs/obsidian2gdocs.py`
+* **Acceso en PATH:** `~/dev/terminal/bin/obsidian2gdocs`
+* **Skill de Gemini CLI:** `~/.gemini/skills/obsidian-to-gdocs/SKILL.md`
+* **Política Always-Allow:** `~/.gemini/policies/obsidian-to-gdocs.toml`

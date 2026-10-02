@@ -3,7 +3,7 @@ name: obsidian-to-gdocs
 description: Converts Obsidian and Markdown documents containing Mermaid diagrams, callouts, tables, and images into self-contained HTML optimized for Google Docs pasting. Use when the user wants to export, convert, or copy Obsidian or Markdown notes to Google Docs or HTML.
 ---
 
-# Obsidian to Google Docs Exporter (`obsidian2gdocs` / `md2gdocs`)
+# Obsidian to Google Docs Exporter (`obsidian2gdocs`)
 
 Expert skill to convert Obsidian notes, vaults, and Markdown files (including Mermaid diagrams, embedded images, formatted tables, code blocks with syntax highlighting, and callouts) into a self-contained HTML document and copy it directly to the macOS clipboard ready to be pasted with full fidelity into Google Docs.
 
@@ -17,7 +17,7 @@ Pasting raw Markdown directly into Google Docs fails because Google Docs does no
 5. Obsidian callouts (`> [!important]`, `> [!tip]`, `> [!danger]`, `> [!info]`, etc.).
 6. Obsidian highlights (`==text==`) and task lists (`- [ ]`, `- [x]`).
 
-This skill uses the centralized CLI utility available as **`obsidian2gdocs`** and **`md2gdocs`** located at `~/dev/tools/python/md2gdocs/md2gdocs.py` (accessible from any folder in `$PATH`).
+This skill uses the centralized CLI utility **`obsidian2gdocs`** located at `~/dev/repos/dariogdr/obsidian2gdocs/obsidian2gdocs.py` (available in `$PATH` as `obsidian2gdocs`).
 
 ## When to Use This Skill
 
@@ -27,14 +27,10 @@ Activate this skill when:
 - The document contains code blocks that need clean, continuous styling without black-and-white zebra striping.
 - The user asks to watch changes on a Markdown file or folder and keep a Google Docs-friendly HTML version updated.
 
-## Available CLI Tools: `obsidian2gdocs` & `md2gdocs`
-
-Both commands are identical symlinks:
+## Available CLI Tool: `obsidian2gdocs`
 
 ```bash
 obsidian2gdocs [paths...] [options]
-# o alternativamente:
-md2gdocs [paths...] [options]
 ```
 
 ### Options
@@ -83,7 +79,7 @@ md2gdocs [paths...] [options]
 
 1. **Identify the Source Document or Directory:**
    Determine the target Markdown file or directory.
-2. **Execute `obsidian2gdocs` (or `md2gdocs`):**
+2. **Execute `obsidian2gdocs`:**
    ```bash
    obsidian2gdocs <path-to-markdown-or-dir>
    ```
